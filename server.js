@@ -4,7 +4,7 @@ const app = express();
 const path = require('path');
 const logger = require('morgan');
 
-const PORT = preocess.env.port || 3001;
+const PORT = process.env.port || 3001;
 
 require('./config/database.js');
 
@@ -12,7 +12,7 @@ app.use(logger('dev'));
 app.use(express.json());
 
 
-app.use(express.static(path.join(_dirname, 'build')));
+// app.use(express.static(path.join(_dirname, 'build')));
 
 
 app.get('/*', (req, res) => {
@@ -20,5 +20,5 @@ app.get('/*', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Quick! Get everything they needed to do and send it through port ${PORT}`)
+  console.log(`Quick! Get all of the users tasks and send them through port ${PORT}`)
 })

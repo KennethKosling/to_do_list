@@ -1,24 +1,29 @@
-import './App.css';
+import React from "react"
+import './App.css'
+import data from '../../data'
+import Input from "../../components/input/Input";
+import List from "../../components/list/List";
+import Finished from "../../components/finished/Finished";
+import { useState } from "react";
 
-function App() {
+export default function App() {
+  const [ input, setInput ] = useState(data)
+  const [ finishedItem, setFinishedItem ] = useState([])
+
+  const finished = (items) => {
+    const finishedItems = [items, ...finishedItem]
+    setFinishedItem(finishedItems)
+  }
+
+  const handleSubmit = (item) => {
+    setInput([{ title: item }, ...input])
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Input handleSubmit={handleSubmit} />
+      <List input={input} finished={finished}/>    
+      <Finished finishedItem={finishedItem}/>
     </div>
-  );
+  )
 }
-
-export default App;
